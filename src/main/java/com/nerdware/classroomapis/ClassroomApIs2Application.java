@@ -8,6 +8,7 @@ import com.nerdware.classroomapis.Repository.ParentRepository;
 import com.nerdware.classroomapis.Repository.StudentRepository;
 import com.nerdware.classroomapis.Repository.SubjectRepository;
 import com.nerdware.classroomapis.Repository.TeacherRepository;
+import com.nerdware.classroomapis.Security.PasswordConfig;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,49 +24,49 @@ public class ClassroomApIs2Application {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(ParentRepository parentRepository, StudentRepository studentRepository, TeacherRepository teacherRepository, SubjectRepository subjectRepository) {
+    CommandLineRunner commandLineRunner(PasswordConfig passwordConfig, ParentRepository parentRepository, StudentRepository studentRepository, TeacherRepository teacherRepository, SubjectRepository subjectRepository) {
         return args -> {
 
-            Parent parent = new Parent();
-            parent.setParentUsername("parent1");
-            parent.setParentPassword("password");
-            parent.setParentRole("ROLE_PARENT");
-            parent.setParentName("John Doe");
-            parent.setParentAddress("123 Main St");
-            parent.setParentPhone(1234567890);
-            parentRepository.save(parent);
+//            Parent parent = new Parent();
+//            parent.setParentUsername("parent1");
+//            parent.setParentPassword(passwordConfig.passwordEncoder().encode("password"));
+//            parent.setParentRole("PARENT");
+//            parent.setParentName("John Doe");
+//            parent.setParentAddress("123 Main St");
+//            parent.setParentPhone(1234567890);
+//            parentRepository.save(parent);
+//
+//            Student student = new Student();
+//            student.setStudentUsername("student1");
+//            student.setStudentPassword(passwordConfig.passwordEncoder().encode("password"));
+//            student.setStudentRole("STUDENT");
+//            student.setStudentName("Jane Doe");
+//            student.setStudentPhone(1234567890);
+//            student.setParent(parent);
+//            studentRepository.save(student);
 
-            Student student = new Student();
-            student.setStudentUsername("student1");
-            student.setStudentPassword("password");
-            student.setStudentRole("ROLE_STUDENT");
-            student.setStudentName("Jane Doe");
-            student.setStudentPhone(1234567890);
-            student.setParent(parent);
-            studentRepository.save(student);
+//            Teacher teacher = new Teacher();
+//            teacher.setTeacherUsername("tom");
+//            teacher.setTeacherPassword(passwordConfig.passwordEncoder().encode("password"));
+//            teacher.setTeacherRole("TEACHER");
+//            teacher.setTeacherName("Tom");
+//            teacherRepository.save(teacher);
 
-            Teacher teacher = new Teacher();
-            teacher.setTeacherUsername("tom");
-            teacher.setTeacherPassword("password");
-            teacher.setTeacherRole("TEACHER");
-            teacher.setTeacherName("Tom");
-            teacherRepository.save(teacher);
+//            Subject subject = new Subject();
+//            subject.setSubjectName("Math");
+//            subject.setSubjectDescription("Mathematics");
+//            subject.setTeacher(teacher);
+//            subjectRepository.save(subject);
 
-            Subject subject = new Subject();
-            subject.setSubjectName("Math");
-            subject.setSubjectDescription("Mathematics");
-            subject.setTeacher(teacher);
-            subjectRepository.save(subject);
+//            student.setSubjects(List.of(subject));
+//            subject.setStudents(List.of(student));
 
-            student.setSubjects(List.of(subject));
-            subject.setStudents(List.of(student));
+//            teacher.setStudents(List.of(student));
+//            student.setTeachers(List.of(teacher));
 
-            teacher.setStudents(List.of(student));
-            student.setTeachers(List.of(teacher));
-
-            studentRepository.save(student);
-            subjectRepository.save(subject);
-            teacherRepository.save(teacher);
+//            studentRepository.save(student);
+//            subjectRepository.save(subject);
+//            teacherRepository.save(teacher);
         };
     }
 
