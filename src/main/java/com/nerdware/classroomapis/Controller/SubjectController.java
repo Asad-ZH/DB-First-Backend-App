@@ -2,6 +2,7 @@ package com.nerdware.classroomapis.Controller;
 
 import com.nerdware.classroomapis.Entity.Subject;
 import com.nerdware.classroomapis.Service.SubjectService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,17 +21,12 @@ public class SubjectController {
     }
 
     @PostMapping("/register-subject")
-    public void registerSubject(@RequestBody Subject subject) {
-        subjectService.registerSubject(subject);
+    public ResponseEntity<Subject> registerSubject(@RequestBody Subject subject) {
+        return subjectService.registerSubject(subject);
     }
 
-    @PutMapping("/update-subject")
-    public void updateSubject(@RequestBody Subject subject) {
-        subjectService.updateSubject(subject);
-    }
-
-    @DeleteMapping("/delete-subject")
-    public void deleteSubject(@RequestParam Long subjectId) {
+    @DeleteMapping("/delete-subject/{subjectId}")
+    public void deleteSubject(@PathVariable Long subjectId) {
         subjectService.deleteSubject(subjectId);
     }
 }

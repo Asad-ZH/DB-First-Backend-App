@@ -3,6 +3,7 @@ package com.nerdware.classroomapis.Service;
 import com.nerdware.classroomapis.Entity.Subject;
 import com.nerdware.classroomapis.Exception.ApiRequestException;
 import com.nerdware.classroomapis.Repository.SubjectRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,15 +15,9 @@ public class SubjectService {
         this.subjectRepository = subjectRepository;
     }
 
-    public void registerSubject(Subject subject) {
+    public ResponseEntity<Subject> registerSubject(Subject subject) {
         subjectRepository.save(subject);
-    }
-
-    public void updateSubject(Subject subject) {
-        if (!subjectRepository.existsById(subject.getSubjectId())) {
-            throw new ApiRequestException("Subject Not Found");
-        }
-        subjectRepository.save(subject);
+        return ResponseEntity.ok(subject);
     }
 
     public void deleteSubject(Long subjectId) {

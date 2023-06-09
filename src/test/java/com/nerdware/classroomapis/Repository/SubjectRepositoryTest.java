@@ -24,7 +24,6 @@ class SubjectRepositoryTest {
 
     @AfterEach
     void tearDown() {
-        subjectRepository.deleteAll();
     }
 
     @Test

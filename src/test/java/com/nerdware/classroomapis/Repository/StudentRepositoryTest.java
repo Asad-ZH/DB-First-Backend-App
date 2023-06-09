@@ -2,7 +2,7 @@ package com.nerdware.classroomapis.Repository;
 
 import com.nerdware.classroomapis.Entity.Student;
 
-import com.nerdware.classroomapis.Security.PasswordConfigTest;
+import com.nerdware.classroomapis.Security.PasswordConfig;
 
 
 import org.junit.jupiter.api.AfterEach;
@@ -20,17 +20,16 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @EnableAutoConfiguration
 @EntityScan(basePackages = {"com.nerdware.classroomapis.Entity"})
 @DataJpaTest
-@Import(PasswordConfigTest.class)
+@Import(PasswordConfig.class)
 class StudentRepositoryTest {
 
     @Autowired
     private StudentRepository underTest;
 
     @Autowired
-    private PasswordConfigTest passwordEncoder;
+    private PasswordConfig passwordEncoder;
     @AfterEach
     void tearDown() {
-        underTest.deleteAll();
     }
 
     @Test

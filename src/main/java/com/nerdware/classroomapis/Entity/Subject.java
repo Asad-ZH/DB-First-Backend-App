@@ -1,6 +1,8 @@
 package com.nerdware.classroomapis.Entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "subject")
 @Data
+@NoArgsConstructor
 public class Subject {
 
     @Id
@@ -33,4 +36,8 @@ public class Subject {
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
+    public Subject(String subjectName, String SubjectDescription) {
+        this.subjectName = subjectName;
+        this.subjectDescription = SubjectDescription;
+    }
 }

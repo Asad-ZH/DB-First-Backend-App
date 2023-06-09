@@ -5,7 +5,7 @@ import com.nerdware.classroomapis.Entity.Parent;
 import java.util.ArrayList;
 
 import com.nerdware.classroomapis.Entity.Teacher;
-import com.nerdware.classroomapis.Security.PasswordConfigTest;
+import com.nerdware.classroomapis.Security.PasswordConfig;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +23,17 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 @EnableAutoConfiguration
 @EntityScan(basePackages = {"com.nerdware.classroomapis.Entity"})
 @DataJpaTest
-@Import(PasswordConfigTest.class)
+@Import(PasswordConfig.class)
 class ParentRepositoryTest {
 
     @Autowired
     private ParentRepository parentRepository;
 
     @Autowired
-    private PasswordConfigTest passwordConfigTest;
+    private PasswordConfig passwordConfigTest;
 
     @AfterEach
     void tearDown() {
-        parentRepository.deleteAll();
     }
 
     @Test
