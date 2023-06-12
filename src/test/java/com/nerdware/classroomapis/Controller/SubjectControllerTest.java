@@ -19,9 +19,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SubjectControllerTest {
 
-    @Autowired
-    private SubjectRepository subjectRepository;
-
     @LocalServerPort
     private int port;
     private String baseUrl = "http://localhost:";
@@ -48,22 +45,30 @@ class SubjectControllerTest {
 
     @Test
     void registerSubject() {
-        String url = baseUrl.concat("/api/subject/register-subject");
+        String registerUrl = baseUrl.concat("/api/subject/register-subject");
 
-        Subject subject = new Subject("phy", "Physics");
-        ResponseEntity<Subject> response = restTemplate.postForEntity(url, subject, Subject.class);
+        Subject subject = new Subject("Math", "Physics");
+        ResponseEntity<Subject> response = restTemplate.postForEntity(registerUrl, subject, Subject.class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
+
+        String deleteUrl = baseUrl.concat("/api/subject/delete-subject/").concat(String.valueOf(response.getBody().getSubjectId()));
+        restTemplate.exchange(deleteUrl, HttpMethod.DELETE, null, String.class, subject.getSubjectId());
     }
 
     @Test
     void deleteSubject() {
         //change the id accordingly
         long subjectId = 25;
+        String registerUrl = baseUrl.concat("/api/subject/register-subject");
 
-        String url = baseUrl.concat("/api/subject/delete-subject/").concat(String.valueOf(subjectId));
+        Subject subject = new Subject("Math", "Physics");
+        ResponseEntity<Subject> registerResponse = restTemplate.postForEntity(registerUrl, subject, Subject.class);
 
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.DELETE, null, String.class, subjectId);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+
+        String deleteUrl = baseUrl.concat("/api/subject/delete-subject/").concat(String.valueOf(registerResponse.getBody().getSubjectId()));
+
+        ResponseEntity<String> deleteResponse = restTemplate.exchange(deleteUrl, HttpMethod.DELETE, null, String.class, subjectId);
+        assertEquals(HttpStatus.OK, deleteResponse.getStatusCode());
     }
 }

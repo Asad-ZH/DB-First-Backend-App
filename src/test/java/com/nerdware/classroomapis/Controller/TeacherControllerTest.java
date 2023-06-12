@@ -69,10 +69,10 @@ class TeacherControllerTest {
     @Test
     void registerSubject() {
         String subjectName = "phy";
-
+        unregisterSubject();
         String url = baseUrl.concat("/api/teacher/register-subject/").concat(subjectName);
 
-        ResponseEntity<Subject> response = restTemplate.postForEntity(url, null, Subject.class);
+        ResponseEntity<String> response = restTemplate.postForEntity(url, null, String.class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
