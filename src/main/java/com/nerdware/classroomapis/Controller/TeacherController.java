@@ -22,9 +22,9 @@ public class TeacherController {
     }
 
 
-    @GetMapping("/subjects")
-    public String getSubjects() {
-        return teacherService.getSubjects();
+    @GetMapping("/subject")
+    public String getSubject() {
+        return teacherService.getSubject();
     }
 
     @GetMapping("/students")
@@ -32,8 +32,8 @@ public class TeacherController {
         return teacherService.getStudents();
     }
 
-    @PostMapping("/register-subject")
-    public void registerSubject(@RequestParam String subjectName) {
+    @PostMapping("/register-subject/{subjectName}")
+    public void registerSubject(@PathVariable String subjectName) {
         teacherService.registerSubject(subjectName);
     }
 

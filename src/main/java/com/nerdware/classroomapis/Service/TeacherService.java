@@ -23,7 +23,7 @@ public class TeacherService {
         this.subjectRepository = subjectRepository;
     }
 
-    public String getSubjects() {
+    public String getSubject() {
         Teacher teacher = fetchData();
         if (teacher.getSubject() == null) {
             throw new ApiRequestException("No Subjects Found");
