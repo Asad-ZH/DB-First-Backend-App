@@ -20,7 +20,7 @@ public class ParentController {
 
     @GetMapping("/test")
     public String getParent() {
-        return "Hello parent";
+        return "Hello Parent";
     }
 
     @GetMapping("/children")
